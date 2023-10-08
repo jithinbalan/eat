@@ -60,6 +60,7 @@ const Scanner = props => {
     });
 
     Quagga.onDetected(detected);
+    
   }, []);
 
   const detected = result => {

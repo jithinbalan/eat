@@ -1,7 +1,7 @@
 import {React,useState} from 'react';
 import './App.css';
 import Scanner from './components/Scanner';
-
+import DrawerAppBar from  './components/AppBar'
 function App() {
     const [camera, setCamera] = useState(false);
   const [result, setResult] = useState(null);
@@ -12,13 +12,7 @@ function App() {
 
   return (
     <div className="App">
-      <p>{result ? result : "Scanning..."}</p>
-      <button onClick={() => setCamera(!camera)}>
-        {camera ? "Stop" : "Start"}
-      </button>
-      <div className="container">
-        {camera && <Scanner onDetected={onDetected} />}
-      </div>
+      <DrawerAppBar onDetected={onDetected} camera={camera} result={result}  setCamera={setCamera}/>
     </div>
   );
 }
