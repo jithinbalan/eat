@@ -1,19 +1,20 @@
-import {React,useState} from 'react';
+import {React} from 'react';
 import './App.css';
-import Scanner from './components/Scanner';
-import DrawerAppBar from  './components/AppBar'
+import ScanLayout from  './layout/ScanLayout'
+import AppBar from '@mui/material/AppBar';
+import Box from '@mui/material/Box';
+import CssBaseline from '@mui/material/CssBaseline';
+import Toolbar from '@mui/material/Toolbar';
+
 function App() {
-    const [camera, setCamera] = useState(false);
-  const [result, setResult] = useState(null);
-
-  const onDetected = result => {
-    setResult(result);
-  };
-
   return (
-    <div className="App">
-      <DrawerAppBar onDetected={onDetected} camera={camera} result={result}  setCamera={setCamera}/>
-    </div>
+    <>
+      <CssBaseline />
+      <AppBar component="nav">
+        <Toolbar />
+      </AppBar>
+      <ScanLayout />
+    </>
   );
 }
 

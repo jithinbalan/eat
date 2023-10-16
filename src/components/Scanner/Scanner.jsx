@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
-import config from "./config.json";
+import config from "../config.json";
 import Quagga from "quagga";
 
 const Scanner = props => {
-  const { onDetected } = props;
+  const { onDetected,isScanning} = props;
 
   useEffect(() => {
+    if (isScanning) {
     Quagga.init(config, err => {
       if (err) {
         console.log(err, "error msg");
@@ -15,7 +16,9 @@ const Scanner = props => {
         Quagga.stop()
       }
     });
-
+  }else{
+    Quagga.stop()
+  }
     //detecting boxes on stream
     Quagga.onProcessed(result => {
       var drawingCtx = Quagga.canvas.ctx.overlay,
@@ -60,18 +63,20 @@ const Scanner = props => {
     });
 
     Quagga.onDetected(detected);
-    
   }, []);
 
   const detected = result => {
     onDetected(result.codeResult.code);
+    Quagga.stop()
   };
 
   return (
     // If you do not specify a target,
     // QuaggaJS would look for an element that matches
     // the CSS selector #interactive.viewport
+    <div className="container">
     <div id="interactive" className="viewport" />
+    </div>
   );
 };
 
