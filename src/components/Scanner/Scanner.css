@@ -1,0 +1,30 @@
+.container {
+    position: relative;
+  }
+  
+  .container,
+  #interactive.viewport {
+    width: 250px;
+    height: 185px;
+  }
+  
+  #interactive.viewport canvas,
+  video {
+    width: 250px;
+    height: 185px;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  
+  #interactive.viewport canvas.drawingBuffer,
+  video.drawingBuffer {
+    width: 250px;
+    height: 185px;
+  }
+
+.scan-button{
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
