@@ -73,7 +73,7 @@ function ScanLayout() {
   const getItem = async (itemId) => {
     try {
       const response = await axios.get(
-        `https://world.openfoodfacts.org/api/v2/product/4009900513906.json`
+        `https://world.openfoodfacts.org/api/v2/product/${itemId}.json`
       );
       setProductDetails(response.data);
     } catch (error) {
@@ -84,20 +84,20 @@ function ScanLayout() {
   const getItemHighLevelDetails = async (itemId) => {
     try {
       const response = await axios.get(
-        `https://world.openfoodfacts.org/api/v2/product/4009900513906?fields=knowledge_panels`
+        `https://world.openfoodfacts.org/api/v2/product/${itemId}?fields=knowledge_panels`
       );
       setProductHighLevelDetails(response.data.product.knowledge_panels);
     } catch (error) {
       console.error(error);
     }
   };
-  useEffect(() => {
-    async function fetchData() {
-      await getItem();
-      await getItemHighLevelDetails();
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     await getItem();
+  //     await getItemHighLevelDetails();
+  //   }
+  //   fetchData();
+  // }, []);
 
   return (
     <>

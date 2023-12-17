@@ -2,25 +2,25 @@ import React, { useEffect } from "react";
 import config from "../config.json";
 import Quagga from "quagga";
 
-const Scanner = props => {
-  const { onDetected,isScanning} = props;
+const Scanner = (props) => {
+  const { onDetected, isScanning } = props;
 
   useEffect(() => {
     if (isScanning) {
-    Quagga.init(config, err => {
-      if (err) {
-        console.log(err, "error msg");
-      }
-      Quagga.start();
-      return () => {
-        Quagga.stop()
-      }
-    });
-  }else{
-    Quagga.stop()
-  }
+      Quagga.init(config, (err) => {
+        if (err) {
+          console.log(err, "error msg");
+        }
+        Quagga.start();
+        return () => {
+          Quagga.stop();
+        };
+      });
+    } else {
+      Quagga.stop();
+    }
     //detecting boxes on stream
-    Quagga.onProcessed(result => {
+    Quagga.onProcessed((result) => {
       var drawingCtx = Quagga.canvas.ctx.overlay,
         drawingCanvas = Quagga.canvas.dom.overlay;
 
@@ -33,13 +33,13 @@ const Scanner = props => {
             Number(drawingCanvas.getAttribute("height"))
           );
           result.boxes
-            .filter(function(box) {
+            .filter(function (box) {
               return box !== result.box;
             })
-            .forEach(function(box) {
+            .forEach(function (box) {
               Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, drawingCtx, {
                 color: "green",
-                lineWidth: 2
+                lineWidth: 2,
               });
             });
         }
@@ -47,7 +47,7 @@ const Scanner = props => {
         if (result.box) {
           Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, drawingCtx, {
             color: "#00F",
-            lineWidth: 2
+            lineWidth: 2,
           });
         }
 
@@ -65,9 +65,9 @@ const Scanner = props => {
     Quagga.onDetected(detected);
   }, []);
 
-  const detected = result => {
+  const detected = (result) => {
     onDetected(result.codeResult.code);
-    Quagga.stop()
+    Quagga.stop();
   };
 
   return (
@@ -75,7 +75,7 @@ const Scanner = props => {
     // QuaggaJS would look for an element that matches
     // the CSS selector #interactive.viewport
     <div className="container">
-    <div id="interactive" className="viewport" />
+      <div id="interactive" className="viewport" />
     </div>
   );
 };

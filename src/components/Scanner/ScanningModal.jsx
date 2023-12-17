@@ -11,21 +11,21 @@ import Typography from "@mui/material/Typography";
 
 import Scanner from "./Scanner";
 import "./Scanner.css";
-import IconButton from '@mui/material/IconButton';
-import CloseIcon from '@mui/icons-material/Close';
-import CircularProgress from '@mui/material/CircularProgress';
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const scannerStyle = {
-  position: 'relative',
-  marginTop: '20px',
-  marginBottom: '20px',
-  width: '100%', // Scanner area takes full width of the modal
-  height: '300px', // Adjust height as needed
-  backgroundColor: '#e0e0e0', // Scanner area background color
-  border: '1px dashed #555', // Dashed border to indicate the scan area
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
+  position: "relative",
+  // marginTop: "20px",
+  // marginBottom: "20px",
+  // width: "100%", // Scanner area takes full width of the modal
+  // height: "300px", // Adjust height as needed
+  backgroundColor: "#e0e0e0", // Scanner area background color
+  border: "1px dashed #555", // Dashed border to indicate the scan area
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
 };
 
 export default function ScanningModal(props) {
@@ -44,26 +44,50 @@ export default function ScanningModal(props) {
     //   </Dialog>
     // </div>
 
-    <Dialog open={props.open} onClose={props.handleClose} maxWidth="sm" fullWidth>
-    <DialogTitle sx={{ bgcolor: 'primary.dark', color: 'common.white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-      Scanning...
-      <IconButton
-        edge="end"
-        color="inherit"
-        onClick={props.handleClose}
-        sx={{ position: 'absolute', right: 8, top: 8 }}
+    <Dialog
+      open={props.open}
+      onClose={props.handleClose}
+      maxWidth="sm"
+      fullWidth
+    >
+      <DialogTitle
+        sx={{
+          bgcolor: "primary.dark",
+          color: "common.white",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
       >
-        <CloseIcon />
-      </IconButton>
-    </DialogTitle>
-    <div style={scannerStyle}>
-      {/* This is where the scanner output would be displayed */}
-      {/* <CircularProgress color="inherit" /> */}
-     <Scanner isScanning={props.open} onDetected={props.onDetected}  handleClose={props.handleClose}/>
+        Scanning...
+        <IconButton edge="end" color="inherit" onClick={props.handleClose}>
+          <CloseIcon />
+        </IconButton>
+      </DialogTitle>
+      <DialogContent
+        sx={{
+          position: "relative",
+          // minHeight: "300px",
+          // display: "flex",
+          // justifyContent: "center",
+          // alignItems: "center",
+        }}
+      >
 
-      {/* You can replace the CircularProgress with your scanning animation or output */}
-    </div>
-  </Dialog>
+      <div style={scannerStyle}>
+        {/* This is where the scanner output would be displayed */}
+        {/* <CircularProgress color="inherit" /> */}
+        <Scanner
+          isScanning={props.open}
+          onDetected={props.onDetected}
+          handleClose={props.handleClose}
+        />
+
+        {/* You can replace the CircularProgress with your scanning animation or output */}
+      </div>
+      </DialogContent>
+
+    </Dialog>
     // <Dialog
     //   open={props.open}
     //   onClose={props.handleClose}
